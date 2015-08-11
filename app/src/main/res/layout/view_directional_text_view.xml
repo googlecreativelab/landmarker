@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.androidexperiments.landmarker.widget.DirectionalTextView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.androidexperiments.landmarker.widget.CompassMarkerView
+        style="@style/CompassMarkerView"
+        android:id="@+id/dtv_marker_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        style="@style/DirectionalTextViewMainText"
+        android:id="@+id/dtv_main_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:lineSpacingExtra="-45sp"
+        android:maxLines="2"
+        android:text="Literally Anything"
+        android:ellipsize="end"/>
+
+    <TextView
+        style="@style/DirectionalTextViewDistanceText"
+        android:id="@+id/dtv_distance_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="68dp" />
+
+</com.androidexperiments.landmarker.widget.DirectionalTextView>

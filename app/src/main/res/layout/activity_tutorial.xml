@@ -1,0 +1,100 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".TutorialActivity">
+
+    <com.androidexperiments.landmarker.widget.TutorialSkylineView
+        android:id="@+id/tut_skyline"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal">
+        
+        <FrameLayout
+            android:layout_width="@dimen/tut_single_skyline_width"
+            android:layout_height="match_parent"
+            android:background="@drawable/tut_skyline_1"/>
+        <FrameLayout
+            android:layout_width="@dimen/tut_single_skyline_width"
+            android:layout_height="match_parent"
+            android:background="@drawable/tut_skyline_2"/>
+        <FrameLayout
+            android:layout_width="@dimen/tut_single_skyline_width"
+            android:layout_height="match_parent"
+            android:background="@drawable/tut_skyline_3"/>
+        <FrameLayout
+            android:layout_width="@dimen/tut_single_skyline_width"
+            android:layout_height="match_parent"
+            android:background="@drawable/tut_skyline_4"/>
+
+    </com.androidexperiments.landmarker.widget.TutorialSkylineView>
+    
+    <FrameLayout
+        android:id="@+id/tut_hand_with_phone"
+        android:layout_alignParentBottom="true"
+        android:layout_width="438dp"
+        android:layout_height="247dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/tut_hand_with_phone">
+
+        <RelativeLayout
+            android:layout_width="202dp"
+            android:layout_height="@dimen/tut_screen_height"
+            android:layout_gravity="end"
+            android:layout_marginEnd="13dp"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/black">
+
+            <FrameLayout
+                android:id="@+id/tut_screen_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/tut_screen_1"/>
+
+            <FrameLayout
+                android:id="@+id/tut_screen_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@drawable/tut_screen_2"/>
+
+            <FrameLayout
+                android:id="@+id/tut_screen_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@drawable/tut_screen_3"/>
+
+            <FrameLayout
+                android:id="@+id/tut_screen_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@drawable/tut_screen_4"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/tut_hand_pointing"
+        android:layout_width="145dp"
+        android:layout_height="@dimen/tut_hand_pointing_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="360dp"
+        android:visibility="gone"
+        android:background="@drawable/tut_hand_pointer" />
+
+    <TextView
+        android:id="@+id/tut_header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:gravity="center"
+        android:text="HOLD UP YOUR DEVICE"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+</RelativeLayout>

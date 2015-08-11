@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <rotate
+        android:fromDegrees="45"
+        android:toDegrees="0"
+        android:duration="550"
+        android:pivotX="0%"
+        android:pivotY="100%"
+        android:startOffset="250"
+        android:interpolator="@android:interpolator/overshoot"/>
+    <alpha
+        android:fromAlpha="0"
+        android:toAlpha="100"
+        android:duration="100"
+        android:startOffset="250"/>
+</set>

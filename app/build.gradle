@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+    defaultConfig {
+        applicationId "com.androidexperiments.landmarker"
+        minSdkVersion 17
+        targetSdkVersion 22
+        versionCode 3
+        versionName "1.0.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.debug
+        }
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.google.android.gms:play-services:7.5.0'
+    compile 'com.jakewharton:butterknife:6.1.0'    //simple dependency injection
+    compile 'se.walkercrou:google-places-api-java:2.1.0'    //google maps places api wrapper
+    compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'    //used by ^
+    compile 'uk.co.chrisjenx:calligraphy:2.1.0'    //simple custom fonts
+    compile 'de.greenrobot:eventbus:2.4.0'    //simple event bus
+}

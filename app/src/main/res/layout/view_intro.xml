@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.androidexperiments.landmarker.widget.IntroView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="@layout/activity_main">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <FrameLayout
+            android:id="@+id/intro_compass"
+            android:layout_width="114dp"
+            android:layout_height="114dp"
+            android:background="@drawable/intro_compass_ring">
+
+            <FrameLayout
+                android:id="@+id/intro_compass_spin"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:background="@drawable/intro_compass_spin"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/intro_load_text"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/intro_compass"
+            android:gravity="center_vertical"
+            android:layout_centerHorizontal="true"
+            android:text="@string/intro_finding_you"
+            android:textColor="@android:color/white"/>
+
+    </RelativeLayout>
+
+
+</com.androidexperiments.landmarker.widget.IntroView>

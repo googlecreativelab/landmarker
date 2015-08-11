@@ -1,0 +1,58 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="DirectionalTextViewMainText">
+        <item name="android:textSize">@dimen/directional_tv_main_text_size</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <!--<item name="android:lineSpacingExtra">-10dp</item>-->
+        <!--<item name="android:drawableEnd">@drawable/white_line</item>-->
+        <item name="android:paddingLeft">26dp</item>
+        <item name="android:paddingRight">26dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <!--<item name="android:background">#33ffffff</item>-->
+    </style>
+
+    <style name="DirectionalTextViewDistanceText">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="CompassMarkerView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingBottom">20dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="fontPath">fonts/texgyreheros-bold.otf</item>
+    </style>
+    
+    <style name="NormalText">
+        <item name="fontPath">fonts/texgyreheros-regular.otf</item>
+    </style>
+
+    <style name="SwingText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontPath">fonts/texgyreheros-bold.otf</item>
+    </style>
+
+    <style name="TitleText">
+        <item name="fontPath">fonts/texgyreheros-bold.otf</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">85sp</item>
+    </style>
+
+    <style name="ButtonStyle" parent="NormalText">
+        <item name="android:textColor">@android:color/white</item>
+        <!--<item name="android:textStyle">bold</item>-->
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_outline</item>
+    </style>
+
+</resources>

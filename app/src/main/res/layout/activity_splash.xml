@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <TextView
+        style="@style/TitleText"
+        android:id="@+id/main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="40dp"
+        android:text="@string/app_name"/>
+
+    <ImageButton
+        android:id="@+id/btn_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:src="@drawable/ic_info_outline_white_24dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@null"/>
+    
+    <LinearLayout
+        android:id="@+id/btn_container"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+    
+        <TextView
+            style="@style/ButtonStyle"
+            android:id="@+id/btn_view_tutorial"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:text="VIEW TUTORIAL"/>
+
+        <TextView
+            style="@style/ButtonStyle"
+            android:id="@+id/btn_begin"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="BEGIN"/>
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/view_info"
+        android:id="@+id/splash_info_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

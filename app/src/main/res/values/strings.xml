@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Landmarker</string>
+
+    <string name="intro_finding_you">Finding you!</string>
+    <string name="intro_finding_places">Finding places!</string>
+
+    <string name="info_dialog_fonts">License for fonts in the app:</string>
+    <string name="info_dialog_github"><![CDATA[Check out the code to this app:<br/><a href="http://www.github.com/trippedout">github.com/trippedout</a>]]></string>
+    <string name="swing_phone">Before you begin, swing your device around to reset sensors</string>
+    <string name="info_exit_btn">Exit Info</string>
+    <string name="info_title">About</string>
+
+    <string name="about_app">Landmarker was created by Anthony Tripaldi at the Google Creative Lab. Go to androidexperiments.com to see other experiments.</string>
+    <string name="about_github">Code is open sourced and can be found at\nhttps://github.com/googlecreativelab/landmarker</string>
+</resources>

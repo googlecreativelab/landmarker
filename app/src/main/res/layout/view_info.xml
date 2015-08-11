@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.androidexperiments.landmarker.widget.InfoView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:background="@android:color/black">
+
+    <ImageButton
+        android:id="@+id/info_close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_clear"
+        android:padding="20dp"
+        android:background="@null"
+        android:contentDescription="@string/info_exit_btn"/>
+
+    <ImageButton
+        android:id="@+id/info_close_btn_fake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_clear"
+        android:padding="20dp"
+        android:visibility="invisible"
+        android:contentDescription="@null"/>
+
+    <LinearLayout
+        android:id="@+id/info_all_text_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/info_close_btn"
+        android:layout_toLeftOf="@id/info_close_btn_fake"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/SwingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info_title"
+            android:textSize="32sp"/>
+
+        <TextView
+            style="@style/SwingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:autoLink="all"
+            android:textColorLink="@android:color/white"
+            android:text="@string/about_app"
+            android:textSize="18sp"/>
+
+        <TextView
+            style="@style/SwingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:autoLink="all"
+            android:textColorLink="@android:color/white"
+            android:text="@string/about_github"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/info_licenses_text_view"
+            style="@style/SwingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Licenses"
+
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/info_licenses_web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/info_close_btn"
+        android:layout_toLeftOf="@id/info_close_btn_fake"
+        android:visibility="invisible"/>
+
+</com.androidexperiments.landmarker.widget.InfoView>

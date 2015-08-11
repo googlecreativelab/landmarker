@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.androidexperiments.landmarker.widget.SwingPhoneView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/swipe_phone_figure_8"
+        android:layout_width="292dp"
+        android:layout_height="102dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/figure_8"
+        android:contentDescription="@null"/>
+    
+    <ImageView
+        android:id="@+id/swipe_phone_image"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/swipe_phone_view_phone"
+        android:contentDescription="@null"/>
+
+    <TextView
+        style="@style/SwingText"
+        android:id="@+id/swing_phone_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/swipe_phone_figure_8"
+        android:layout_marginTop="30dp"
+        android:text="@string/swing_phone" />
+
+</com.androidexperiments.landmarker.widget.SwingPhoneView>

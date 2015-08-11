@@ -1,0 +1,17 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="compass_marker_padding">35dp</dimen>
+    <dimen name="compass_marker_line_width">1dp</dimen>
+    <dimen name="intro_main_title_gradient_width">75dp</dimen>
+
+    <dimen name="directional_tv_main_text_size">90sp</dimen>
+    <dimen name="directional_tv_main_text_size_small">70sp</dimen>
+
+    <dimen name="tut_single_skyline_width">320dp</dimen>
+    <dimen name="tut_full_skyline_width">1280dp</dimen>
+    <dimen name="tut_hand_pointing_height">176dp</dimen>
+    <dimen name="tut_screen_height">114dp</dimen>
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="false">
+
+    <translate
+        android:fillAfter="false"
+        android:fillEnabled="true"
+        android:fromYDelta="0%"
+        android:toYDelta="20%"
+        android:duration="250"
+        android:startOffset="600"
+        android:interpolator="@android:interpolator/decelerate_quint"/>
+    <translate
+        android:fillBefore="false"
+        android:fillAfter="true"
+        android:fillEnabled="true"
+        android:fromYDelta="20%"
+        android:toYDelta="-40%"
+        android:duration="250"
+        android:fromXDelta="0"
+        android:toXDelta="0"
+        android:startOffset="950"
+        android:interpolator="@android:interpolator/decelerate_quint"/>
+
+</set>

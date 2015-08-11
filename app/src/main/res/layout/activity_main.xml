@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black" tools:context=".MainActivity">
+
+    <include
+        layout="@layout/view_intro"
+        android:id="@+id/intro_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <include
+        layout="@layout/view_swing_phone"
+        android:id="@+id/swing_phone_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.androidexperiments.landmarker.widget.DirectionalTextViewContainer
+        android:id="@+id/directional_text_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/view_directional_text_view"
+            android:id="@+id/dtv_north"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <include
+            layout="@layout/view_directional_text_view"
+            android:id="@+id/dtv_south"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <include
+            layout="@layout/view_directional_text_view"
+            android:id="@+id/dtv_east"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <include
+            layout="@layout/view_directional_text_view"
+            android:id="@+id/dtv_west"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.androidexperiments.landmarker.widget.DirectionalTextViewContainer>
+
+    <FrameLayout
+        android:id="@+id/maps_button_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#cc000000"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/maps_button_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/map_icon"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_place_white_48dp"
+                android:contentDescription="@null"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/map_icon"
+                android:layout_marginTop="12dp"
+                android:layout_centerHorizontal="true"
+                android:text="Open in Google Maps"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"/>
+
+        </RelativeLayout>
+
+
+        <ImageButton
+            android:id="@+id/maps_button_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_clear"
+            android:padding="20dp"
+            android:background="@null"
+            android:layout_gravity="right"
+            android:contentDescription="Back"/>
+    </FrameLayout>
+
+</RelativeLayout>
