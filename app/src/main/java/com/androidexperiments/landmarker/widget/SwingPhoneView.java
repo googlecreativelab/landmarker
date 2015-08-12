@@ -24,13 +24,15 @@ import de.greenrobot.event.EventBus;
 /**
  * Figure 8 animation
  */
-public class SwingPhoneView extends RelativeLayout
-{
+public class SwingPhoneView extends RelativeLayout {
     private static final String TAG = SwingPhoneView.class.getSimpleName();
 
-    @InjectView(R.id.swipe_phone_figure_8) ImageView mFigure8View;
-    @InjectView(R.id.swipe_phone_image) ImageView mPhoneImageView;
-    @InjectView(R.id.swing_phone_text) TextView mText;
+    @InjectView(R.id.swipe_phone_figure_8)
+    ImageView mFigure8View;
+    @InjectView(R.id.swipe_phone_image)
+    ImageView mPhoneImageView;
+    @InjectView(R.id.swing_phone_text)
+    TextView mText;
 
     private Animation mScaleIn, mFromBottom, mScaleOut;
 
@@ -50,7 +52,7 @@ public class SwingPhoneView extends RelativeLayout
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        ButterKnife.inject(this,this);
+        ButterKnife.inject(this, this);
 
         mScaleIn = AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
         mScaleIn.setInterpolator(new OvershootInterpolator(1.2f));
@@ -76,9 +78,8 @@ public class SwingPhoneView extends RelativeLayout
         startLoop();
     }
 
-    private void startLoop()
-    {
-        float pi =  (float)Math.PI;
+    private void startLoop() {
+        float pi = (float) Math.PI;
 
         ValueAnimator animator = ValueAnimator.ofFloat(pi / 2, -pi - pi / 2);
         animator.setDuration(1750);
@@ -87,13 +88,12 @@ public class SwingPhoneView extends RelativeLayout
             float lastVal = 0.f;
 
             @Override
-            public void onAnimationUpdate(ValueAnimator animation)
-            {
+            public void onAnimationUpdate(ValueAnimator animation) {
                 double t = Double.parseDouble(animation.getAnimatedValue().toString());
-                double scale = 2 / (3 - Math.cos(2.*t));
-                float unscaledX = (float)Math.cos(t);
-                float x = (float)scale * unscaledX;
-                float y = (float)scale * (float)Math.sin(2 * t) / 2;
+                double scale = 2 / (3 - Math.cos(2. * t));
+                float unscaledX = (float) Math.cos(t);
+                float x = (float) scale * unscaledX;
+                float y = (float) scale * (float) Math.sin(2 * t) / 2;
 
                 mPhoneImageView.setTranslationX(x * (mFigure8View.getWidth() / 2));
                 mPhoneImageView.setTranslationY(y * (mFigure8View.getHeight()));
@@ -102,15 +102,14 @@ public class SwingPhoneView extends RelativeLayout
                 float half = .55f;
 
                 // moving right
-                if(x >= lastVal) {
-                    if(x <= 0.f) {
-                        if(x < -half)
+                if (x >= lastVal) {
+                    if (x <= 0.f) {
+                        if (x < -half)
                             rotation = map(x, -1, -half, -90, 0);
                         else
                             rotation = map(x, -half, 0f, 0, 30);
-                    }
-                    else {
-                        if(x > half)
+                    } else {
+                        if (x > half)
                             rotation = map(x, half, 1, 0, -90);
                         else
                             rotation = map(x, 0, half, 30, 0);
@@ -118,13 +117,12 @@ public class SwingPhoneView extends RelativeLayout
                 }
                 // moving left
                 else {
-                    if(x >= 0.f) {
-                        if(x > half)
+                    if (x >= 0.f) {
+                        if (x > half)
                             rotation = map(x, 1, half, -90, -180);
                         else
                             rotation = map(x, half, 0, -180, -210);
-                    }
-                    else {
+                    } else {
                         if (x < -half)
                             rotation = map(x, -1, -half, -90, -180);
                         else
@@ -148,8 +146,7 @@ public class SwingPhoneView extends RelativeLayout
         animator.start();
     }
 
-    private void animateOut()
-    {
+    private void animateOut() {
         this.setVisibility(GONE);
         this.startAnimation(mScaleOut);
         mScaleOut.setAnimationListener(new SimpleAnimationListener() {
@@ -165,5 +162,6 @@ public class SwingPhoneView extends RelativeLayout
     }
 
     //event bus
-    public static class OnAnimateOutCompleteEvent { }
+    public static class OnAnimateOutCompleteEvent {
+    }
 }

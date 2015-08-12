@@ -17,11 +17,11 @@ import butterknife.OnClick;
 /**
  * Splash shit
  */
-public class SplashActivity extends BaseActivity
-{
+public class SplashActivity extends BaseActivity {
     private static final String TAG = SplashActivity.class.getSimpleName();
 
-    @InjectView(R.id.splash_info_view) InfoView mInfoView;
+    @InjectView(R.id.splash_info_view)
+    InfoView mInfoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,7 @@ public class SplashActivity extends BaseActivity
     }
 
     @OnClick(R.id.btn_begin)
-    public void onBeginClick()
-    {
+    public void onBeginClick() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
@@ -43,8 +42,7 @@ public class SplashActivity extends BaseActivity
     }
 
     @OnClick(R.id.btn_view_tutorial)
-    public void onViewTutorialClick()
-    {
+    public void onViewTutorialClick() {
         Intent intent = new Intent(this, TutorialActivity.class);
         startActivity(intent);
 
@@ -58,14 +56,12 @@ public class SplashActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
-        if(mInfoView.getVisibility() == View.VISIBLE)
-        {
-            if(mInfoView.isWebViewShowing())
+        if (mInfoView.getVisibility() == View.VISIBLE) {
+            if (mInfoView.isWebViewShowing())
                 mInfoView.hideWebView();
             else
                 mInfoView.setVisibility(View.GONE);
-        }
-        else
+        } else
             super.onBackPressed();
     }
 }

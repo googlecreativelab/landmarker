@@ -19,13 +19,15 @@ import butterknife.InjectView;
 /**
  * Intro view for app startup
  */
-public class IntroView extends RelativeLayout
-{
+public class IntroView extends RelativeLayout {
     private static final String TAG = IntroView.class.getSimpleName();
 
-    @InjectView(R.id.intro_compass) View mCompass;
-    @InjectView(R.id.intro_compass_spin) View mCompassSpinner;
-    @InjectView(R.id.intro_load_text) TextView mSubTextView;
+    @InjectView(R.id.intro_compass)
+    View mCompass;
+    @InjectView(R.id.intro_compass_spin)
+    View mCompassSpinner;
+    @InjectView(R.id.intro_load_text)
+    TextView mSubTextView;
 
     private Animation mSpinnerAnim;
     private Handler mSpinnerHandler;
@@ -56,8 +58,7 @@ public class IntroView extends RelativeLayout
         super.onFinishInflate();
     }
 
-    public void animateIn(final Runnable completeRunner)
-    {
+    public void animateIn(final Runnable completeRunner) {
         Animation scale = AnimationUtils.loadAnimation(this.getContext(), R.anim.intro_compass_in);
         scale.setInterpolator(new DecelerateInterpolator(1.5f));
         mCompass.startAnimation(scale);
@@ -86,7 +87,7 @@ public class IntroView extends RelativeLayout
         mSpinnerHandler.post(new Runnable() {
             @Override
             public void run() {
-                if(mIsDone)
+                if (mIsDone)
                     return;
                 mCompassSpinner.startAnimation(mSpinnerAnim);
                 mSpinnerHandler.postDelayed(this, 1500);
@@ -94,16 +95,14 @@ public class IntroView extends RelativeLayout
         });
     }
 
-    public void animateOut()
-    {
+    public void animateOut() {
         Animation hide = AnimationUtils.loadAnimation(getContext(), R.anim.hide_intro_view);
         mIsDone = true;
         this.startAnimation(hide);
         this.setVisibility(GONE);
     }
 
-    public void setIsFindingPlaces()
-    {
+    public void setIsFindingPlaces() {
         mSubTextView.setText(R.string.intro_finding_places);
     }
 }

@@ -10,8 +10,7 @@ import java.util.List;
  *
  * @see com.androidexperiments.landmarker.widget.DirectionalTextViewContainer#updatePlaces(List, Location)
  */
-public class NearbyPlace
-{
+public class NearbyPlace {
     private float distance;
     private String name;
 

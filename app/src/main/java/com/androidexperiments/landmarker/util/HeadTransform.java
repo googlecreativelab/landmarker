@@ -23,7 +23,9 @@ import android.opengl.Matrix;
  */
 public class HeadTransform {
 
-    /** Epsilon value used to detect Gimbal lock situations when computing Euler angles. */
+    /**
+     * Epsilon value used to detect Gimbal lock situations when computing Euler angles.
+     */
     private static final float GIMBAL_LOCK_EPSILON = 1e-2f;
 
     private final float[] headView;
@@ -34,12 +36,9 @@ public class HeadTransform {
     }
 
     /**
-     * @hide
-     *
-     * Returns the array where the camera to head matrix transform is stored.
-     * For internal use only.
-     *
      * @return The array where the headView matrix is stored.
+     * @hide Returns the array where the camera to head matrix transform is stored.
+     * For internal use only.
      */
     public float[] getHeadView() {
         return headView;
@@ -51,7 +50,7 @@ public class HeadTransform {
      * Head origin is defined as the center point between the two eyes.
      *
      * @param headView Array where the 4x4 column-major transformation matrix will be written to.
-     * @param offset Offset in the array where data should be written.
+     * @param offset   Offset in the array where data should be written.
      * @throws IllegalArgumentException If there is not enough space to write the result.
      */
     public void getHeadView(float[] headView, int offset) {
@@ -70,7 +69,7 @@ public class HeadTransform {
      * Make sure to invert it if ever used to compute the basis of a right-handed system.
      *
      * @param forward Array where the forward vector will be written to.
-     * @param offset Offset in the array where data should be written.
+     * @param offset  Offset in the array where data should be written.
      * @throws IllegalArgumentException If there is not enough space to write the result.
      */
     public void getForwardVector(float[] forward, int offset) {
@@ -88,7 +87,7 @@ public class HeadTransform {
     /**
      * Provides the upwards direction of the head as a 3x1 unit vector.
      *
-     * @param up Array where the up vector will be written to.
+     * @param up     Array where the up vector will be written to.
      * @param offset Offset in the array where data should be written.
      * @throws IllegalArgumentException If there is not enough space to write the result.
      */
@@ -107,7 +106,7 @@ public class HeadTransform {
     /**
      * Provides the rightwards direction of the head as a 3x1 unit vector.
      *
-     * @param right Array where the right vector will be written to.
+     * @param right  Array where the right vector will be written to.
      * @param offset Offset in the array where data should be written.
      * @throws IllegalArgumentException If there is not enough space to write the result.
      */
@@ -127,7 +126,7 @@ public class HeadTransform {
      * Provides the quaternion representing the head rotation.
      *
      * @param quaternion Array where the quaternion (x, y, z, w) will be written to.
-     * @param offset Offset in the array where data should be written.
+     * @param offset     Offset in the array where data should be written.
      * @throws IllegalArgumentException If there is not enough space to write the result.
      */
     public void getQuaternion(float[] quaternion, int offset) {
@@ -182,26 +181,26 @@ public class HeadTransform {
 
     /**
      * Provides the Euler angles representation of the head rotation.
-     *
+     * <p/>
      * <p>Use of Euler angles is discouraged as they might be subject to Gimbal lock situations.
      * Use quaternions or rotation matrices instead whenever possible.
-     *
+     * <p/>
      * <p>The provided values represent the viewport rotation as pitch, yaw and roll angles
      * where the matrix R = Rz(roll) * Rx(pitch) * Ry(yaw) represents the full rotation.
      * This rotation matrix order ensures both yaw and roll are in the full [-pi, pi] interval.
-     *
+     * <p/>
      * <p>The angles are provided in radians, in this order and within the following intervals:
      * <ul>
-     *   <li> Pitch (X axis): [-pi/2, pi/2]
-     *   <li> Yaw (Y axis): [-pi, pi]
-     *   <li> Roll (Z axis): [-pi, pi]
+     * <li> Pitch (X axis): [-pi/2, pi/2]
+     * <li> Yaw (Y axis): [-pi, pi]
+     * <li> Roll (Z axis): [-pi, pi]
      * </ul>
-     *
+     * <p/>
      * <p>The X-Y-Z axes are the basis of a right-handed OpenGL-style coordinate system.
      * During Gimbal lock this method enforces yaw to 0 and provides a valid roll angle.
      *
      * @param eulerAngles Array where the 3 angles will be written to.
-     * @param offset Offset in the array where data should be written.
+     * @param offset      Offset in the array where data should be written.
      * @throws IllegalArgumentException If there is not enough space to write the result.
      */
     public void getEulerAngles(float[] eulerAngles, int offset) {
@@ -236,7 +235,7 @@ public class HeadTransform {
      * Provides the relative translation of the head as a 3x1 vector.
      *
      * @param translation Array where the translation vector will be written to.
-     * @param offset Offset in the array where data should be written.
+     * @param offset      Offset in the array where data should be written.
      * @throws IllegalArgumentException If there is not enough space to write the result.
      */
     public void getTranslation(float[] translation, int offset) {

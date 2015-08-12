@@ -23,8 +23,10 @@ import butterknife.OnClick;
  */
 public class InfoView extends RelativeLayout {
 
-    @InjectView(R.id.info_licenses_text_view)    TextView mLicensesTextView;
-    @InjectView(R.id.info_licenses_web_view)    WebView mLicenseWebview;
+    @InjectView(R.id.info_licenses_text_view)
+    TextView mLicensesTextView;
+    @InjectView(R.id.info_licenses_web_view)
+    WebView mLicenseWebview;
 
     public InfoView(Context context) {
         super(context);
@@ -54,7 +56,7 @@ public class InfoView extends RelativeLayout {
         StringBuilder builder = new StringBuilder();
         String line = null;
         try {
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 builder.append(line);
             }
             reader.close();

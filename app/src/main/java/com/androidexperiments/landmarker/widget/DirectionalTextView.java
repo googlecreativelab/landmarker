@@ -23,8 +23,7 @@ import de.greenrobot.event.EventBus;
 /**
  * view that takes big text and little guy
  */
-public class DirectionalTextView extends FrameLayout
-{
+public class DirectionalTextView extends FrameLayout {
     private static final String TAG = DirectionalTextView.class.getSimpleName();
 
     /**
@@ -44,9 +43,12 @@ public class DirectionalTextView extends FrameLayout
      */
     private static final String KEY_IS_METRIC = "key_is_metric";
 
-    @InjectView(R.id.dtv_main_text) TextView mMainText;
-    @InjectView(R.id.dtv_marker_view) TextView mMarkerText;
-    @InjectView(R.id.dtv_distance_text) TextView mDistanceText;
+    @InjectView(R.id.dtv_main_text)
+    TextView mMainText;
+    @InjectView(R.id.dtv_marker_view)
+    TextView mMarkerText;
+    @InjectView(R.id.dtv_distance_text)
+    TextView mDistanceText;
 
     private float mTranslationX = 0.f;
     private float mGotoX = 0.f;
@@ -100,20 +102,18 @@ public class DirectionalTextView extends FrameLayout
         mMarkerText.setText(dir);
     }
 
-    public void setPlaces(ArrayList<NearbyPlace> places)
-    {
+    public void setPlaces(ArrayList<NearbyPlace> places) {
         mPlaces = places;
-        if(mPlaces.size() > 0)
+        if (mPlaces.size() > 0)
             setPlace(mPlaces.get(0));
         else
             setEmptyPlace();
     }
 
     @OnClick(R.id.dtv_distance_text)
-    public void onDistanceClicked() 
-    {
+    public void onDistanceClicked() {
         mIsMetric = !mIsMetric;
-        
+
         SharedPreferences prefs = getContext().getSharedPreferences(NAME_SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(KEY_IS_METRIC, mIsMetric);
@@ -122,14 +122,12 @@ public class DirectionalTextView extends FrameLayout
         EventBus.getDefault().post(new OnDistanceUnitsChangedEvent(mIsMetric));
     }
 
-    public void onEvent(OnDistanceUnitsChangedEvent event)
-    {
+    public void onEvent(OnDistanceUnitsChangedEvent event) {
         mIsMetric = event.isMetric;
         setDistanceText();
     }
 
-    public void setDistance(float distance)
-    {
+    public void setDistance(float distance) {
         mDistanceInKilometers = distance / 1000;
         mDistanceInMiles = getMiles(distance);
 
@@ -137,14 +135,13 @@ public class DirectionalTextView extends FrameLayout
     }
 
     private void setDistanceText() {
-        if(mIsMetric)
+        if (mIsMetric)
             mDistanceText.setText(String.format("%.1f", mDistanceInKilometers) + " km");
         else
             mDistanceText.setText(String.format("%.1f", mDistanceInMiles) + " mi");
     }
 
-    private void setEmptyPlace()
-    {
+    private void setEmptyPlace() {
         this.setText("");
         mMainText.setTextColor(0xaaffffff);
         mMainText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.directional_tv_main_text_size_small));
@@ -157,18 +154,16 @@ public class DirectionalTextView extends FrameLayout
         this.setDistance(place.getDistance());
     }
 
-    public void setText(String name)
-    {
+    public void setText(String name) {
         mMainText.setText(name);
     }
 
 
     private float getMiles(float meters) {
-        return meters*0.000621371192f;
+        return meters * 0.000621371192f;
     }
 
-    public NearbyPlace getCurrentPlace()
-    {
+    public NearbyPlace getCurrentPlace() {
         return mCurrentPlace;
     }
 
@@ -177,24 +172,22 @@ public class DirectionalTextView extends FrameLayout
         mMainText.setTranslationY(translationY);
     }
 
-    private void setRandomPlace()
-    {
+    private void setRandomPlace() {
         int size = mPlaces.size();
-        if(size > 0)
-            setPlace(mPlaces.get((int)Math.floor(Math.random() * size)));
+        if (size > 0)
+            setPlace(mPlaces.get((int) Math.floor(Math.random() * size)));
     }
 
     /**
      * move the view the proper amount
-     * @param offset -1 to 1 will be displaying on screen somehow
+     *
+     * @param offset    -1 to 1 will be displaying on screen somehow
      * @param viewWidth total width of each view to mulitply by
      */
-    public void setTranslation(float offset, int viewWidth)
-    {
+    public void setTranslation(float offset, int viewWidth) {
         mGotoX = (offset * viewWidth);
 
-        if(Math.abs(mGotoX - mLastX) > MAX_JUMP)
-        {
+        if (Math.abs(mGotoX - mLastX) > MAX_JUMP) {
             mTranslationX = mGotoX;
             this.setTranslationX(mTranslationX);
         }
@@ -202,15 +195,14 @@ public class DirectionalTextView extends FrameLayout
         mLastX = mGotoX;
     }
 
-    public void springUp()
-    {
+    public void springUp() {
         final ObjectAnimator anim = ObjectAnimator.ofFloat(mMainText, "translationY", mMainText.getTranslationY(), 0.f);
         anim.setInterpolator(new OvershootInterpolator(12.f));
         anim.setDuration(300);
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                if(animation.getAnimatedFraction() > 2.0f) {
+                if (animation.getAnimatedFraction() > 2.0f) {
                     setRandomPlace();
                     anim.removeUpdateListener(this);
                 }
@@ -224,7 +216,7 @@ public class DirectionalTextView extends FrameLayout
         distance.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                float frac = (float)animation.getAnimatedValue();
+                float frac = (float) animation.getAnimatedValue();
                 mDistanceText.setAlpha(frac);
                 mDistanceText.setScaleX(frac);
                 mDistanceText.setScaleY(frac);
@@ -233,8 +225,7 @@ public class DirectionalTextView extends FrameLayout
         distance.start();
     }
 
-    public void returnToPosition()
-    {
+    public void returnToPosition() {
         ObjectAnimator anim = ObjectAnimator.ofFloat(mMainText, "translationY", mMainText.getTranslationY(), 0.f);
         anim.setDuration(250);
         anim.start();
@@ -253,23 +244,20 @@ public class DirectionalTextView extends FrameLayout
         distance.start();
     }
 
-    public void drawView()
-    {
+    public void drawView() {
         mTranslationX += (mGotoX - mTranslationX) * 0.12f;
         this.setTranslationX((int) mTranslationX);
     }
 
-    public String getDir()
-    {
+    public String getDir() {
         return mMarkerText.getText().toString();
     }
 
-    public void updatePostition(float percent)
-    {
+    public void updatePostition(float percent) {
         int TOTAL_Y_MOVEMENT = -480;
         float HALF_PI = (float) Math.PI / 2.f;
 
-        float v = (float)Math.sin(percent * HALF_PI) * -(TOTAL_Y_MOVEMENT / 2);
+        float v = (float) Math.sin(percent * HALF_PI) * -(TOTAL_Y_MOVEMENT / 2);
         this.setTranslationY(v);
 
         float reverse = 1.f - percent;
@@ -279,8 +267,7 @@ public class DirectionalTextView extends FrameLayout
         mDistanceText.setScaleY(reverse);
     }
 
-    public static class OnDistanceUnitsChangedEvent
-    {
+    public static class OnDistanceUnitsChangedEvent {
         public boolean isMetric;
 
         public OnDistanceUnitsChangedEvent(boolean isMetric) {
