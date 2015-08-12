@@ -13,11 +13,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.creativelabs.androidexperiments.typecompass.R;
 import com.androidexperiments.landmarker.util.SimpleAnimationListener;
+import com.google.creativelabs.androidexperiments.typecompass.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
@@ -27,11 +27,11 @@ import de.greenrobot.event.EventBus;
 public class SwingPhoneView extends RelativeLayout {
     private static final String TAG = SwingPhoneView.class.getSimpleName();
 
-    @InjectView(R.id.swipe_phone_figure_8)
+    @Bind(R.id.swipe_phone_figure_8)
     ImageView mFigure8View;
-    @InjectView(R.id.swipe_phone_image)
+    @Bind(R.id.swipe_phone_image)
     ImageView mPhoneImageView;
-    @InjectView(R.id.swing_phone_text)
+    @Bind(R.id.swing_phone_text)
     TextView mText;
 
     private Animation mScaleIn, mFromBottom, mScaleOut;
@@ -52,7 +52,7 @@ public class SwingPhoneView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        ButterKnife.inject(this, this);
+        ButterKnife.bind(this, this);
 
         mScaleIn = AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
         mScaleIn.setInterpolator(new OvershootInterpolator(1.2f));

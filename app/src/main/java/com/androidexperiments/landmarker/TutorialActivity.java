@@ -16,33 +16,33 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
-import com.google.creativelabs.androidexperiments.typecompass.R;
 import com.androidexperiments.landmarker.util.AnimationChain;
 import com.androidexperiments.landmarker.util.SimpleAnimationListener;
 import com.androidexperiments.landmarker.widget.TutorialSkylineView;
+import com.google.creativelabs.androidexperiments.typecompass.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class TutorialActivity extends BaseActivity {
 
     private static final String TAG = TutorialActivity.class.getSimpleName();
 
-    @InjectView(R.id.tut_skyline)
+    @Bind(R.id.tut_skyline)
     TutorialSkylineView mSkyline;
-    @InjectView(R.id.tut_hand_with_phone)
+    @Bind(R.id.tut_hand_with_phone)
     View mHandWithPhone;
-    @InjectView(R.id.tut_hand_pointing)
+    @Bind(R.id.tut_hand_pointing)
     View mHandPointing;
-    @InjectView(R.id.tut_header_text)
+    @Bind(R.id.tut_header_text)
     TextView mHeaderText;
-    @InjectView(R.id.tut_screen_1)
+    @Bind(R.id.tut_screen_1)
     View mScreen1;
-    @InjectView(R.id.tut_screen_2)
+    @Bind(R.id.tut_screen_2)
     View mScreen2;
-    @InjectView(R.id.tut_screen_3)
+    @Bind(R.id.tut_screen_3)
     View mScreen3;
-    @InjectView(R.id.tut_screen_4)
+    @Bind(R.id.tut_screen_4)
     View mScreen4;
 
     private boolean mIsFirstRun = true;
@@ -58,7 +58,7 @@ public class TutorialActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mHandHeight = getResources().getDimensionPixelSize(R.dimen.tut_hand_pointing_height);
         mScreenHeight = getResources().getDimensionPixelSize(R.dimen.tut_screen_height);

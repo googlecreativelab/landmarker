@@ -15,14 +15,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
-import com.google.creativelabs.androidexperiments.typecompass.R;
 import com.androidexperiments.landmarker.data.NearbyPlace;
+import com.google.creativelabs.androidexperiments.typecompass.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 import se.walkercrou.places.Place;
 
@@ -38,13 +38,13 @@ public class DirectionalTextViewContainer extends FrameLayout {
     private int TOTAL_Y_MOVEMENT = -980;
 
 
-    @InjectView(R.id.dtv_north)
+    @Bind(R.id.dtv_north)
     DirectionalTextView mNorth;
-    @InjectView(R.id.dtv_east)
+    @Bind(R.id.dtv_east)
     DirectionalTextView mEast;
-    @InjectView(R.id.dtv_south)
+    @Bind(R.id.dtv_south)
     DirectionalTextView mSouth;
-    @InjectView(R.id.dtv_west)
+    @Bind(R.id.dtv_west)
     DirectionalTextView mWest;
 
     ArrayList<NearbyPlace> mNorthernPlaces, mEasternPlaces, mSouthernPlaces, mWesternPlaces;
@@ -71,7 +71,7 @@ public class DirectionalTextViewContainer extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        ButterKnife.inject(this, this);
+        ButterKnife.bind(this, this);
 
         mNorth.setDir("N");
         mEast.setDir("E");

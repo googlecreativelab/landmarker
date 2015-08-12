@@ -10,13 +10,13 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.google.creativelabs.androidexperiments.typecompass.R;
 import com.androidexperiments.landmarker.data.NearbyPlace;
+import com.google.creativelabs.androidexperiments.typecompass.R;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
@@ -43,11 +43,11 @@ public class DirectionalTextView extends FrameLayout {
      */
     private static final String KEY_IS_METRIC = "key_is_metric";
 
-    @InjectView(R.id.dtv_main_text)
+    @Bind(R.id.dtv_main_text)
     TextView mMainText;
-    @InjectView(R.id.dtv_marker_view)
+    @Bind(R.id.dtv_marker_view)
     TextView mMarkerText;
-    @InjectView(R.id.dtv_distance_text)
+    @Bind(R.id.dtv_distance_text)
     TextView mDistanceText;
 
     private float mTranslationX = 0.f;
@@ -78,7 +78,7 @@ public class DirectionalTextView extends FrameLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        ButterKnife.inject(this, this);
+        ButterKnife.bind(this, this);
 
         //restore saved metric settings
         SharedPreferences prefs = getContext().getSharedPreferences(NAME_SHARED_PREFS, Context.MODE_PRIVATE);

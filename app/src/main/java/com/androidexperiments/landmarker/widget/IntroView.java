@@ -10,11 +10,11 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.creativelabs.androidexperiments.typecompass.R;
 import com.androidexperiments.landmarker.util.SimpleAnimationListener;
+import com.google.creativelabs.androidexperiments.typecompass.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Intro view for app startup
@@ -22,11 +22,11 @@ import butterknife.InjectView;
 public class IntroView extends RelativeLayout {
     private static final String TAG = IntroView.class.getSimpleName();
 
-    @InjectView(R.id.intro_compass)
+    @Bind(R.id.intro_compass)
     View mCompass;
-    @InjectView(R.id.intro_compass_spin)
+    @Bind(R.id.intro_compass_spin)
     View mCompassSpinner;
-    @InjectView(R.id.intro_load_text)
+    @Bind(R.id.intro_load_text)
     TextView mSubTextView;
 
     private Animation mSpinnerAnim;
@@ -47,7 +47,7 @@ public class IntroView extends RelativeLayout {
 
     @Override
     protected void onFinishInflate() {
-        ButterKnife.inject(this, this);
+        ButterKnife.bind(this, this);
 
         mSpinnerAnim = AnimationUtils.loadAnimation(getContext(), R.anim.intro_compass_spinner);
         mSpinnerHandler = new Handler();

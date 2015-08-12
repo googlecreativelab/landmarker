@@ -40,6 +40,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -79,13 +80,13 @@ public class MainActivity extends BaseActivity implements
     private Location mLastLocation;
     private GooglePlaces mPlacesApi;
 
-    @InjectView(R.id.intro_view)
+    @Bind(R.id.intro_view)
     IntroView mIntroView;
-    @InjectView(R.id.swing_phone_view)
+    @Bind(R.id.swing_phone_view)
     SwingPhoneView mSwingPhoneView;
-    @InjectView(R.id.directional_text_view_container)
+    @Bind(R.id.directional_text_view_container)
     DirectionalTextViewContainer mDirectionalTextViewContainer;
-    @InjectView(R.id.maps_button_view_container)
+    @Bind(R.id.maps_button_view_container)
     View mMapsButtonViewContainer;
 
     private NearbyPlace mCurrentPlace;
@@ -119,7 +120,7 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void initViews() {
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mSwingPhoneView.setVisibility(View.GONE);
         mDirectionalTextViewContainer.setVisibility(View.GONE);
