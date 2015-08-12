@@ -16,8 +16,7 @@ import com.google.creativelabs.androidexperiments.typecompass.R;
 /**
  * Scrollable skyline vector
  */
-public class TutorialSkylineView extends LinearLayout
-{
+public class TutorialSkylineView extends LinearLayout {
     private static final String TAG = TutorialSkylineView.class.getSimpleName();
 
     private int mMaxWidth;
@@ -38,13 +37,12 @@ public class TutorialSkylineView extends LinearLayout
         init();
     }
 
-    private void init()
-    {
+    private void init() {
         this.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                mMaxWidth = (int)getResources().getDimension(R.dimen.tut_full_skyline_width);//TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, , getResources().getDisplayMetrics());
+                mMaxWidth = (int) getResources().getDimension(R.dimen.tut_full_skyline_width);//TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, , getResources().getDisplayMetrics());
                 mWidth = getWidth();
             }
         });
@@ -52,14 +50,14 @@ public class TutorialSkylineView extends LinearLayout
 
     /**
      * used for animating from the beginning of image to the end
+     *
      * @param screen1 first screen visible on phone
      * @param screen2 second screen to come into view with background animation
-     * @param next next step of animation to run
+     * @param next    next step of animation to run
      * @param handler handle that will post next runnable
      * @param delay
      */
-    public void goToEnd(final View screen1, final View screen2, final Runnable next, final Handler handler, final int delay)
-    {
+    public void goToEnd(final View screen1, final View screen2, final Runnable next, final Handler handler, final int delay) {
         final int sw = screen1.getWidth(); //screen widths
         screen2.setVisibility(VISIBLE);
 
@@ -69,7 +67,7 @@ public class TutorialSkylineView extends LinearLayout
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                for(int i = 0; i < getChildCount(); i++) {
+                for (int i = 0; i < getChildCount(); i++) {
                     getChildAt(i).setTranslationX((int) animation.getAnimatedValue());
                 }
                 screen1.setTranslationX(-sw * animation.getAnimatedFraction());

@@ -15,22 +15,21 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
-import com.google.creativelabs.androidexperiments.typecompass.R;
 import com.androidexperiments.landmarker.data.NearbyPlace;
+import com.google.creativelabs.androidexperiments.typecompass.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 import se.walkercrou.places.Place;
 
 /**
  * Handles 4 textviews and displays them in NSEW orientation
  */
-public class DirectionalTextViewContainer extends FrameLayout
-{
+public class DirectionalTextViewContainer extends FrameLayout {
     private static final String TAG = DirectionalTextViewContainer.class.getSimpleName();
 
     //defaults
@@ -39,10 +38,14 @@ public class DirectionalTextViewContainer extends FrameLayout
     private int TOTAL_Y_MOVEMENT = -980;
 
 
-    @InjectView(R.id.dtv_north) DirectionalTextView mNorth;
-    @InjectView(R.id.dtv_east) DirectionalTextView mEast;
-    @InjectView(R.id.dtv_south) DirectionalTextView mSouth;
-    @InjectView(R.id.dtv_west) DirectionalTextView mWest;
+    @Bind(R.id.dtv_north)
+    DirectionalTextView mNorth;
+    @Bind(R.id.dtv_east)
+    DirectionalTextView mEast;
+    @Bind(R.id.dtv_south)
+    DirectionalTextView mSouth;
+    @Bind(R.id.dtv_west)
+    DirectionalTextView mWest;
 
     ArrayList<NearbyPlace> mNorthernPlaces, mEasternPlaces, mSouthernPlaces, mWesternPlaces;
 
@@ -66,10 +69,9 @@ public class DirectionalTextViewContainer extends FrameLayout
     }
 
     @Override
-    protected void onFinishInflate()
-    {
+    protected void onFinishInflate() {
         super.onFinishInflate();
-        ButterKnife.inject(this, this);
+        ButterKnife.bind(this, this);
 
         mNorth.setDir("N");
         mEast.setDir("E");
@@ -80,8 +82,7 @@ public class DirectionalTextViewContainer extends FrameLayout
         setupTouchListener();
     }
 
-    private void setupMovementConstants()
-    {
+    private void setupMovementConstants() {
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         Point windowSize = new Point();
         wm.getDefaultDisplay().getSize(windowSize);
@@ -90,33 +91,28 @@ public class DirectionalTextViewContainer extends FrameLayout
         TOTAL_Y_MOVEMENT = MAX_Y_MOVEMENT - MIN_Y_MOVEMENT;
     }
 
-    private void setupTouchListener()
-    {
-        final GestureDetectorCompat gd = new GestureDetectorCompat(getContext(), new GestureDetector.SimpleOnGestureListener(){
+    private void setupTouchListener() {
+        final GestureDetectorCompat gd = new GestureDetectorCompat(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
-            public boolean onSingleTapConfirmed(MotionEvent e)
-            {
+            public boolean onSingleTapConfirmed(MotionEvent e) {
                 Log.d(TAG, "singleTap: " + getTappedView(e));
                 EventBus.getDefault().post(new OnPlaceClickedEvent(getTappedView(e).getCurrentPlace()));
                 return false;
             }
         });
 
-        this.setOnTouchListener(new OnTouchListener()
-        {
+        this.setOnTouchListener(new OnTouchListener() {
             float mStartY = 0.f;
             DirectionalTextView view = null;
 
             @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
+            public boolean onTouch(View v, MotionEvent event) {
                 gd.onTouchEvent(event);
 
                 int type = event.getActionMasked();
                 float dif, percent;
 
-                switch(type)
-                {
+                switch (type) {
                     case MotionEvent.ACTION_DOWN:
                         view = getTappedView(event);
                         Log.d(TAG, "onTouchDown: " + view.getDir());
@@ -126,11 +122,10 @@ public class DirectionalTextViewContainer extends FrameLayout
 
                     case MotionEvent.ACTION_MOVE:
                         dif = mStartY - event.getRawY();
-                        if(dif < MIN_Y_MOVEMENT && dif > MAX_Y_MOVEMENT)
-                        {
+                        if (dif < MIN_Y_MOVEMENT && dif > MAX_Y_MOVEMENT) {
                             percent = dif / TOTAL_Y_MOVEMENT;
 
-                            if(view != null) {
+                            if (view != null) {
                                 view.updatePostition(percent);
                             }
                         }
@@ -138,12 +133,11 @@ public class DirectionalTextViewContainer extends FrameLayout
 
                     case MotionEvent.ACTION_CANCEL:
                     case MotionEvent.ACTION_UP:
-                        if(view!= null)
-                        {
+                        if (view != null) {
                             dif = mStartY - event.getRawY();
                             percent = dif / TOTAL_Y_MOVEMENT;
 
-                            if(percent > .5f)
+                            if (percent > .5f)
                                 view.springUp();
                             else
                                 view.returnToPosition();
@@ -157,39 +151,36 @@ public class DirectionalTextViewContainer extends FrameLayout
         });
     }
 
-    private DirectionalTextView getTappedView(MotionEvent e)
-    {
+    private DirectionalTextView getTappedView(MotionEvent e) {
         float tapX = e.getX();
         float nx = mNorth.getX(), ex = mEast.getX(),
                 sx = mSouth.getX(), wx = mWest.getX();
 
         //the weird one - since south will move to complete opposite side of screen
         //depending on whether its to the right or left.
-        if((tapX >= ex && tapX < sx) || (tapX >= ex && sx < mViewWidth * -2))
+        if ((tapX >= ex && tapX < sx) || (tapX >= ex && sx < mViewWidth * -2))
             return mEast;
 
-        //everything else is pretty straight forward
-        else if(tapX >= nx && tapX < ex)
+            //everything else is pretty straight forward
+        else if (tapX >= nx && tapX < ex)
             return mNorth;
 
-        else if(tapX >= wx && tapX < nx)
+        else if (tapX >= wx && tapX < nx)
             return mWest;
 
-        //south is most finicky but if we test for all above cases, only remaining woudld be south
+            //south is most finicky but if we test for all above cases, only remaining woudld be south
         else
             return mSouth;
     }
 
-    public void updatePlaces(List<Place> places, Location lastLocation)
-    {
+    public void updatePlaces(List<Place> places, Location lastLocation) {
         //wipe old places
         mNorthernPlaces = new ArrayList<>();
         mEasternPlaces = new ArrayList<>();
         mSouthernPlaces = new ArrayList<>();
         mWesternPlaces = new ArrayList<>();
 
-        for(Place place : places)
-        {
+        for (Place place : places) {
             Location placeLoc = new Location("placeLoc");
             placeLoc.setLatitude(place.getLatitude());
             placeLoc.setLongitude(place.getLongitude());
@@ -202,11 +193,11 @@ public class DirectionalTextViewContainer extends FrameLayout
             NearbyPlace newPlace = new NearbyPlace(distance, place.getName());
 
             //simple but useful
-            if(bearing > -45.f && bearing < 45.f) // north
+            if (bearing > -45.f && bearing < 45.f) // north
                 mNorthernPlaces.add(newPlace);
-            else if(bearing > 45.f && bearing < 135.f) // east
+            else if (bearing > 45.f && bearing < 135.f) // east
                 mEasternPlaces.add(newPlace);
-            else if(bearing < -45.f && bearing > -135.f) // west
+            else if (bearing < -45.f && bearing > -135.f) // west
                 mWesternPlaces.add(newPlace);
             else
                 mSouthernPlaces.add(newPlace);
@@ -218,8 +209,7 @@ public class DirectionalTextViewContainer extends FrameLayout
         mSouth.setPlaces(mSouthernPlaces);
     }
 
-    public void updateFakePlaces()
-    {
+    public void updateFakePlaces() {
         mNorth.setText("Empire State Building");
         mEast.setText("Williamsburg Bridge");
         mSouth.setText("One World Trade");
@@ -228,16 +218,16 @@ public class DirectionalTextViewContainer extends FrameLayout
 
     /**
      * degrees range from -180 -> 180, 0 being due EAST and -90 being north
+     *
      * @param degrees
      */
-    public void updateView(double degrees)
-    {
+    public void updateView(double degrees) {
         //hack
         degrees = (degrees + 180) % 360 - 90;
-        if(degrees < 0)
+        if (degrees < 0)
             degrees = 360 + degrees;
 
-        if(mViewWidth == 0)
+        if (mViewWidth == 0)
             mViewWidth = mEast.getWidth();
 
 //        mCurrentDegrees = degrees;
@@ -250,10 +240,10 @@ public class DirectionalTextViewContainer extends FrameLayout
 
         //south is weird
         float southOffset = 0.f;
-        if(degrees > 0.f && degrees < 90.f)
-            southOffset = ((float)degrees) / DEGREE;
+        if (degrees > 0.f && degrees < 90.f)
+            southOffset = ((float) degrees) / DEGREE;
         else
-            southOffset = ((float)degrees - 360) / DEGREE;
+            southOffset = ((float) degrees - 360) / DEGREE;
 
         mNorth.setTranslation(northOffset, mViewWidth);
         mWest.setTranslation(westOffset, mViewWidth);
@@ -261,24 +251,21 @@ public class DirectionalTextViewContainer extends FrameLayout
         mSouth.setTranslation(southOffset, mViewWidth);
     }
 
-    public void animateIn()
-    {
-        if(this.getVisibility() == GONE)
-        {
+    public void animateIn() {
+        if (this.getVisibility() == GONE) {
             Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.show_directional_text_views);
             this.startAnimation(anim);
             this.setVisibility(VISIBLE);
         }
     }
 
-    public void startDrawing()
-    {
+    public void startDrawing() {
         mIsDrawing = true;
 
         mDrawingHandler.post(new Runnable() {
             @Override
             public void run() {
-                if(!mIsDrawing) return;
+                if (!mIsDrawing) return;
 
                 mNorth.drawView();
                 mWest.drawView();
@@ -294,8 +281,9 @@ public class DirectionalTextViewContainer extends FrameLayout
         mIsDrawing = false;
     }
 
-    public static class OnPlaceClickedEvent{
+    public static class OnPlaceClickedEvent {
         public NearbyPlace place;
+
         public OnPlaceClickedEvent(NearbyPlace place) {
             this.place = place;
         }

@@ -16,26 +16,34 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
-import com.google.creativelabs.androidexperiments.typecompass.R;
 import com.androidexperiments.landmarker.util.AnimationChain;
 import com.androidexperiments.landmarker.util.SimpleAnimationListener;
 import com.androidexperiments.landmarker.widget.TutorialSkylineView;
+import com.google.creativelabs.androidexperiments.typecompass.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class TutorialActivity extends BaseActivity {
 
     private static final String TAG = TutorialActivity.class.getSimpleName();
 
-    @InjectView(R.id.tut_skyline)    TutorialSkylineView mSkyline;
-    @InjectView(R.id.tut_hand_with_phone)    View mHandWithPhone;
-    @InjectView(R.id.tut_hand_pointing)    View mHandPointing;
-    @InjectView(R.id.tut_header_text)    TextView mHeaderText;
-    @InjectView(R.id.tut_screen_1)    View mScreen1;
-    @InjectView(R.id.tut_screen_2)    View mScreen2;
-    @InjectView(R.id.tut_screen_3)    View mScreen3;
-    @InjectView(R.id.tut_screen_4)    View mScreen4;
+    @Bind(R.id.tut_skyline)
+    TutorialSkylineView mSkyline;
+    @Bind(R.id.tut_hand_with_phone)
+    View mHandWithPhone;
+    @Bind(R.id.tut_hand_pointing)
+    View mHandPointing;
+    @Bind(R.id.tut_header_text)
+    TextView mHeaderText;
+    @Bind(R.id.tut_screen_1)
+    View mScreen1;
+    @Bind(R.id.tut_screen_2)
+    View mScreen2;
+    @Bind(R.id.tut_screen_3)
+    View mScreen3;
+    @Bind(R.id.tut_screen_4)
+    View mScreen4;
 
     private boolean mIsFirstRun = true;
 
@@ -50,7 +58,7 @@ public class TutorialActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mHandHeight = getResources().getDimensionPixelSize(R.dimen.tut_hand_pointing_height);
         mScreenHeight = getResources().getDimensionPixelSize(R.dimen.tut_screen_height);
@@ -66,9 +74,8 @@ public class TutorialActivity extends BaseActivity {
     }
 
     @Override
-    protected void onPause()
-    {
-        if(mCurrentAnimationChain != null) {
+    protected void onPause() {
+        if (mCurrentAnimationChain != null) {
             mCurrentAnimationChain.setShouldRun(false);
         }
         super.onPause();
@@ -157,7 +164,7 @@ public class TutorialActivity extends BaseActivity {
             }
         });
 
-        ObjectAnimator screen3Down = ObjectAnimator.ofFloat(mScreen3, "translationY", -mScreenHeight /2, 0);
+        ObjectAnimator screen3Down = ObjectAnimator.ofFloat(mScreen3, "translationY", -mScreenHeight / 2, 0);
         screen3Down.setInterpolator(new AccelerateInterpolator(1.5f));
         screen3Down.setDuration(250);
         screen3Down.addListener(new AnimatorListenerAdapter() {
@@ -218,13 +225,14 @@ public class TutorialActivity extends BaseActivity {
 
     /**
      * convenience method for swapping in new text to header textview
+     *
      * @param text
      */
     private void showNextText(final String text) {
         final Animation hideText = AnimationUtils.loadAnimation(this, R.anim.hide_to_top);
         final Animation showText = AnimationUtils.loadAnimation(this, R.anim.show_from_top);
 
-        hideText.setAnimationListener(new SimpleAnimationListener(){
+        hideText.setAnimationListener(new SimpleAnimationListener() {
             @Override
             public void onAnimationEnd(Animation animation) {
                 hideText.setAnimationListener(null);

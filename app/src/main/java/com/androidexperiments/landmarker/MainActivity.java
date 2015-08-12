@@ -40,6 +40,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -50,8 +51,7 @@ import se.walkercrou.places.Place;
 
 public class MainActivity extends BaseActivity implements
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener
-{
+        GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     //go to https://code.google.com/apis/console to register an app and get a key!
@@ -80,10 +80,14 @@ public class MainActivity extends BaseActivity implements
     private Location mLastLocation;
     private GooglePlaces mPlacesApi;
 
-    @InjectView(R.id.intro_view) IntroView mIntroView;
-    @InjectView(R.id.swing_phone_view) SwingPhoneView mSwingPhoneView;
-    @InjectView(R.id.directional_text_view_container) DirectionalTextViewContainer mDirectionalTextViewContainer;
-    @InjectView(R.id.maps_button_view_container) View mMapsButtonViewContainer;
+    @Bind(R.id.intro_view)
+    IntroView mIntroView;
+    @Bind(R.id.swing_phone_view)
+    SwingPhoneView mSwingPhoneView;
+    @Bind(R.id.directional_text_view_container)
+    DirectionalTextViewContainer mDirectionalTextViewContainer;
+    @Bind(R.id.maps_button_view_container)
+    View mMapsButtonViewContainer;
 
     private NearbyPlace mCurrentPlace;
 
@@ -116,14 +120,13 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void initViews() {
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mSwingPhoneView.setVisibility(View.GONE);
         mDirectionalTextViewContainer.setVisibility(View.GONE);
     }
 
-    private void initSensors()
-    {
+    private void initSensors() {
         mHeadTracker = HeadTracker.createFromContext(this);
         mHeadTransform = new HeadTransform();
     }
@@ -164,15 +167,14 @@ public class MainActivity extends BaseActivity implements
         mDirectionalTextViewContainer.startDrawing();
 
         //animateIn
-        if(mIsFirstRun)
-        {
+        if (mIsFirstRun) {
             animateTitleIn();
             mIsFirstRun = false;
             return;
         }
 
         //resuming from pause/maps
-        if(mHasPlaces)
+        if (mHasPlaces)
             startTracking();
     }
 
@@ -203,10 +205,8 @@ public class MainActivity extends BaseActivity implements
     //butterknife
 
     @OnClick(R.id.maps_button_view)
-    public void onMapsButtonClick()
-    {
-        if(mCurrentPlace == null)
-        {
+    public void onMapsButtonClick() {
+        if (mCurrentPlace == null) {
             Log.w(TAG, "No currentPlace available - must be empty. Ignore click.");
             return;
         }
@@ -219,15 +219,13 @@ public class MainActivity extends BaseActivity implements
             //cheating!
             intent.setPackage("com.google.android.apps.maps");
             startActivity(intent);
-        }
-        catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
     @OnClick(R.id.maps_button_close)
-    public void onMapsViewCloseClicked()
-    {
+    public void onMapsViewCloseClicked() {
         hideMapsButtonView();
     }
 
@@ -239,9 +237,8 @@ public class MainActivity extends BaseActivity implements
     //overrides
 
     @Override
-    public void onBackPressed()
-    {
-        if(mMapsButtonViewContainer.getVisibility() == View.VISIBLE)
+    public void onBackPressed() {
+        if (mMapsButtonViewContainer.getVisibility() == View.VISIBLE)
             hideMapsButtonView();
         else
             super.onBackPressed();
@@ -249,13 +246,11 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CHECK_SETTINGS)
-        {
-            if(resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CHECK_SETTINGS) {
+            if (resultCode == RESULT_OK) {
                 //settings have been enabled, continue forward!
                 setLocationListener();
-            }
-            else {
+            } else {
                 //we need location enabled for this app to work, so exit if we can't
                 Toast.makeText(
                         this,
@@ -274,11 +269,11 @@ public class MainActivity extends BaseActivity implements
 
     /**
      * handle when a place is clicked
+     *
      * @param event custom EventBus event
      */
-    public void onEvent(DirectionalTextViewContainer.OnPlaceClickedEvent event)
-    {
-        if(event.place == null) {
+    public void onEvent(DirectionalTextViewContainer.OnPlaceClickedEvent event) {
+        if (event.place == null) {
             Log.w(TAG, "ignoring because no place is currently available.");
             return;
         }
@@ -289,12 +284,11 @@ public class MainActivity extends BaseActivity implements
 
     //private api
 
-    private void animateTitleIn()
-    {
+    private void animateTitleIn() {
         final Runnable completeRunner = new Runnable() {
             @Override
             public void run() {
-                if(mIsConnectedToGApi)
+                if (mIsConnectedToGApi)
                     checkLastLocation();
                 else
                     mIsReadyToCheckLastLocation = true;
@@ -314,16 +308,14 @@ public class MainActivity extends BaseActivity implements
         }, 500);
     }
 
-    private void showMapsButtonView()
-    {
+    private void showMapsButtonView() {
         mMapsButtonViewContainer.setVisibility(View.VISIBLE);
         Animation anim = new AlphaAnimation(0.f, 1.f);
         anim.setDuration(300);
         mMapsButtonViewContainer.startAnimation(anim);
     }
 
-    private void hideMapsButtonView()
-    {
+    private void hideMapsButtonView() {
         mMapsButtonViewContainer.setVisibility(View.GONE);
         Animation anim = new AlphaAnimation(1.f, 0.f);
         anim.setDuration(300);
@@ -334,8 +326,7 @@ public class MainActivity extends BaseActivity implements
      * method for refreshing content from Places API.
      * will check location if its latest and do as needed
      */
-    private void checkLastLocation()
-    {
+    private void checkLastLocation() {
         mLocationReq = new LocationRequest();
         mLocationReq.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationReq.setInterval(1000);
@@ -344,7 +335,7 @@ public class MainActivity extends BaseActivity implements
 
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-        if(mLastLocation == null) {
+        if (mLastLocation == null) {
             checkSettings();
             return;
         }
@@ -354,7 +345,7 @@ public class MainActivity extends BaseActivity implements
         int hours = getLocationAgeHours(mLastLocation);
         Log.d(TAG, mLastLocation + "\nHours since update: " + hours);
 
-        if(hours > MIN_AGE_IN_HOURS) { // || seconds > 15 ) //for testing
+        if (hours > MIN_AGE_IN_HOURS) { // || seconds > 15 ) //for testing
             setLocationListener();
             return;
         }
@@ -363,9 +354,8 @@ public class MainActivity extends BaseActivity implements
         getNewPlaces();
     }
 
-    private int getLocationAgeHours(Location loc)
-    {
-        long duration  = (SystemClock.elapsedRealtimeNanos() - loc.getElapsedRealtimeNanos()) / 1000000L;
+    private int getLocationAgeHours(Location loc) {
+        long duration = (SystemClock.elapsedRealtimeNanos() - loc.getElapsedRealtimeNanos()) / 1000000L;
         int seconds = (int) Math.floor(duration / 1000);
 
 //        Log.d(TAG, "getLocationAge() elapsed: " + (SystemClock.elapsedRealtimeNanos() / 1000000L)  + " location: " +  (loc.getElapsedRealtimeNanos() / 1000000L) + " seconds: " + seconds);
@@ -373,8 +363,7 @@ public class MainActivity extends BaseActivity implements
         return (int) Math.floor(seconds / 60 / 60);
     }
 
-    private void checkSettings()
-    {
+    private void checkSettings() {
         //get settings request for our location request
         LocationSettingsRequest req = new LocationSettingsRequest.Builder()
                 .addLocationRequest(mLocationReq)
@@ -410,8 +399,7 @@ public class MainActivity extends BaseActivity implements
         });
     }
 
-    private void setLocationListener()
-    {
+    private void setLocationListener() {
         Log.d(TAG, "setLocationListener() " + mLocationReq);
 
         PendingResult<Status> result = LocationServices.FusedLocationApi.requestLocationUpdates(
@@ -422,13 +410,12 @@ public class MainActivity extends BaseActivity implements
                     int numTries = 0;
 
                     @Override
-                    public void onLocationChanged(Location location)
-                    {
+                    public void onLocationChanged(Location location) {
                         numTries++;
 
                         Log.d(TAG, "onLocationChanged() attempt: " + numTries + " :: " + location);
 
-                        if(getLocationAgeHours(location) <= MIN_AGE_IN_HOURS || numTries == MAX_UPDATE_TRIES) {
+                        if (getLocationAgeHours(location) <= MIN_AGE_IN_HOURS || numTries == MAX_UPDATE_TRIES) {
                             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
                             mLastLocation = location;
                             getNewPlaces();
@@ -445,8 +432,7 @@ public class MainActivity extends BaseActivity implements
         });
     }
 
-    private void getNewPlaces()
-    {
+    private void getNewPlaces() {
         //update introview
         runOnUiThread(new Runnable() {
             @Override
@@ -456,17 +442,14 @@ public class MainActivity extends BaseActivity implements
         });
 
         //find some places!
-        new AsyncTask<Void, Void, List<Place>>()
-        {
+        new AsyncTask<Void, Void, List<Place>>() {
             @Override
-            protected List<Place> doInBackground(Void... params)
-            {
+            protected List<Place> doInBackground(Void... params) {
                 List<Place> places = null;
 
                 try {
                     places = mPlacesApi.getNearbyPlaces(mLastLocation.getLatitude(), mLastLocation.getLongitude(), MAX_RADIUS, 60);
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     //if getNearbyPlaces fails, return null and directional will do what it needs to
                     Log.e(TAG, e.getLocalizedMessage());
                     e.printStackTrace();
@@ -475,10 +458,8 @@ public class MainActivity extends BaseActivity implements
             }
 
             @Override
-            protected void onPostExecute(List<Place> places)
-            {
-                if(places == null)
-                {
+            protected void onPostExecute(List<Place> places) {
+                if (places == null) {
                     Toast.makeText(
                             MainActivity.this,
                             "There are no places near you - Please try again later.",
@@ -518,14 +499,13 @@ public class MainActivity extends BaseActivity implements
         this.finish();
     }
 
-    private void startTracking()
-    {
+    private void startTracking() {
         mIsTracking = true;
 
         mTrackingHandler.post(new Runnable() {
             @Override
             public void run() {
-                if(!mIsTracking) return;
+                if (!mIsTracking) return;
 
                 mHeadTracker.getLastHeadView(mHeadTransform.getHeadView(), 0);
                 mHeadTransform.getEulerAngles(mEulerAngles, 0);
@@ -547,21 +527,19 @@ public class MainActivity extends BaseActivity implements
     //google api stuffs
 
     @Override
-    public void onConnected(Bundle bundle)
-    {
+    public void onConnected(Bundle bundle) {
         Log.d(TAG, "onConnected() " + (bundle != null ? bundle.toString() : "null"));
 
         mIsConnectedToGApi = true;
 
-        if(mIsReadyToCheckLastLocation) {
+        if (mIsReadyToCheckLastLocation) {
             checkLastLocation();
             mIsReadyToCheckLastLocation = false;
         }
     }
 
     @Override
-    public void onConnectionSuspended(int i)
-    {
+    public void onConnectionSuspended(int i) {
         Log.d(TAG, "onConnectionSuspended() " + i);
         mIsConnectedToGApi = false;
     }

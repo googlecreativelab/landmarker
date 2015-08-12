@@ -11,8 +11,7 @@ import com.google.creativelabs.androidexperiments.typecompass.R;
 /**
  * letter and a silly line
  */
-public class CompassMarkerView extends TextView
-{
+public class CompassMarkerView extends TextView {
     private Paint mPaint;
     private Paint mLightPaint;
 
@@ -53,7 +52,7 @@ public class CompassMarkerView extends TextView
         //vars
         int halfWidth = canvas.getWidth() / 2;
         int quartWidth = halfWidth / 2;
-        int halfLine = (int)mLineWidth / 2;
+        int halfLine = (int) mLineWidth / 2;
         int height = canvas.getHeight();
 
         //main

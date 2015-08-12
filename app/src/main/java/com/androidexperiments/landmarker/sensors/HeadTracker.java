@@ -38,8 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 
 /**
- * @hide
- * Provides head tracking information from the device IMU.
+ * @hide Provides head tracking information from the device IMU.
  */
 public class HeadTracker implements SensorEventListener {
     // The neck model parameters may be exposed as a per-user preference in the
@@ -76,7 +75,9 @@ public class HeadTracker implements SensorEventListener {
 
     private float neckModelFactor = DEFAULT_NECK_MODEL_FACTOR;
 
-    /** Guards {@link #setNeckModelFactor}. */
+    /**
+     * Guards {@link #setNeckModelFactor}.
+     */
     private final Object neckModelFactorMutex = new Object();
 
     private volatile boolean tracking;
@@ -84,10 +85,14 @@ public class HeadTracker implements SensorEventListener {
     // Kalman filter based orientation tracker.
     private final OrientationEKF tracker;
 
-    /** Guards {@link #gyroBiasEstimator}. */
+    /**
+     * Guards {@link #gyroBiasEstimator}.
+     */
     private final Object gyroBiasEstimatorMutex = new Object();
 
-    /** Used to estimate gyro bias. Disabled when set to {@code null}, which is the default. */
+    /**
+     * Used to estimate gyro bias. Disabled when set to {@code null}, which is the default.
+     */
     private GyroscopeBiasEstimator gyroBiasEstimator;
 
     /**
@@ -102,7 +107,9 @@ public class HeadTracker implements SensorEventListener {
     // Clock timestamp of the latest gyro event update in nanoseconds.
     private long latestGyroEventClockTimeNs;
 
-    /** Set to false after we've processed our first gyro value. */
+    /**
+     * Set to false after we've processed our first gyro value.
+     */
     private volatile boolean firstGyroValue = true;
 
     /**
@@ -111,13 +118,19 @@ public class HeadTracker implements SensorEventListener {
      */
     private float[] initialSystemGyroBias = new float[3];
 
-    /** The gyroscope bias. (0, 0, 0) if bias correction is disabled. */
+    /**
+     * The gyroscope bias. (0, 0, 0) if bias correction is disabled.
+     */
     private final Vector3d gyroBias = new Vector3d();
 
-    /** The last gyro values, after subtracting the bias in {@link #gyroBias}. */
+    /**
+     * The last gyro values, after subtracting the bias in {@link #gyroBias}.
+     */
     private final Vector3d latestGyro = new Vector3d();
 
-    /** The last accelerometer values. */
+    /**
+     * The last accelerometer values.
+     */
     private final Vector3d latestAcc = new Vector3d();
 
     /**
@@ -139,10 +152,11 @@ public class HeadTracker implements SensorEventListener {
 
     /**
      * Default constructor.
+     *
      * @param sensorEventProvider provides SensorEvents to the head tracker.
-     * @param clock globaly consistent clock that should be shared by all system that needs a
-     *    synchronous time.
-     * @param display device display to get access to the static rotation of the screen.
+     * @param clock               globaly consistent clock that should be shared by all system that needs a
+     *                            synchronous time.
+     * @param display             device display to get access to the static rotation of the screen.
      */
     public HeadTracker(
             SensorEventProvider sensorEventProvider, Clock clock, Display display) {
@@ -218,8 +232,7 @@ public class HeadTracker implements SensorEventListener {
                 }
             }
             tracker.processGyro(latestGyro, event.timestamp);
-        }
-        else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+        } else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
             //add mag events to our tracker
             tracker.processMag(event.values, event.timestamp);
         }
@@ -273,8 +286,7 @@ public class HeadTracker implements SensorEventListener {
     }
 
     /**
-     * @hide
-     * Enables or disables use of the neck model for head tracking.
+     * @hide Enables or disables use of the neck model for head tracking.
      * Refer to {@link CardboardView#setNeckModelEnabled} for more details.
      */
     public void setNeckModelEnabled(boolean enabled) {
@@ -286,8 +298,7 @@ public class HeadTracker implements SensorEventListener {
     }
 
     /**
-     * @hide
-     * Gets the neck model factor for head tracking. Refer to {@link CardboardView#getNeckModelFactor}
+     * @hide Gets the neck model factor for head tracking. Refer to {@link CardboardView#getNeckModelFactor}
      * for more details.
      */
     public float getNeckModelFactor() {
@@ -297,8 +308,7 @@ public class HeadTracker implements SensorEventListener {
     }
 
     /**
-     * @hide
-     * Sets the neck model factor for head tracking. Refer to {@link CardboardView#setNeckModelFactor}
+     * @hide Sets the neck model factor for head tracking. Refer to {@link CardboardView#setNeckModelFactor}
      * for more details.
      */
     public void setNeckModelFactor(float factor) {
@@ -311,8 +321,7 @@ public class HeadTracker implements SensorEventListener {
     }
 
     /**
-     * @hide
-     * Enables or disables use of gyro bias estimation. This should preferably be called before
+     * @hide Enables or disables use of gyro bias estimation. This should preferably be called before
      * tracking is started to avoid jumps in head tracking.
      */
     public void setGyroBiasEstimationEnabled(boolean enabled) {
@@ -328,8 +337,7 @@ public class HeadTracker implements SensorEventListener {
     }
 
     /**
-     * @hide
-     * Whether gyro bias estimation is enabled.
+     * @hide Whether gyro bias estimation is enabled.
      */
     public boolean getGyroBiasEstimationEnabled() {
         synchronized (gyroBiasEstimatorMutex) {
@@ -341,7 +349,7 @@ public class HeadTracker implements SensorEventListener {
      * Provides the most up-to-date transformation matrix.
      *
      * @param headView An array representing a 4x4 transformation matrix in column major order.
-     * @param offset Offset in the array where data should be written.
+     * @param offset   Offset in the array where data should be written.
      * @throws IllegalArgumentException If there is not enough space to write the result.
      */
     public void getLastHeadView(float[] headView, int offset) {
@@ -409,7 +417,7 @@ public class HeadTracker implements SensorEventListener {
 
     /**
      * Returns a current sensor to world transformation. This is a rotation matrix.
-     * <p>
+     * <p/>
      * Visible for testing.
      */
     Matrix3x3d getCurrentPoseForTest() {

@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -23,8 +23,10 @@ import butterknife.OnClick;
  */
 public class InfoView extends RelativeLayout {
 
-    @InjectView(R.id.info_licenses_text_view)    TextView mLicensesTextView;
-    @InjectView(R.id.info_licenses_web_view)    WebView mLicenseWebview;
+    @Bind(R.id.info_licenses_text_view)
+    TextView mLicensesTextView;
+    @Bind(R.id.info_licenses_web_view)
+    WebView mLicenseWebview;
 
     public InfoView(Context context) {
         super(context);
@@ -42,7 +44,7 @@ public class InfoView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        ButterKnife.inject(this, this);
+        ButterKnife.bind(this, this);
 
         setupText();
         setupWebView();
@@ -54,7 +56,7 @@ public class InfoView extends RelativeLayout {
         StringBuilder builder = new StringBuilder();
         String line = null;
         try {
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 builder.append(line);
             }
             reader.close();
