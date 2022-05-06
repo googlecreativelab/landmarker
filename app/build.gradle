@@ -31,7 +31,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.google.android.gms:play-services:7.5.0'
-    compile 'com.jakewharton:butterknife:6.1.0'    //simple dependency injection
+    compile 'com.jakewharton:butterknife:7.0.1'    //simple dependency injection
     compile 'se.walkercrou:google-places-api-java:2.1.0'    //google maps places api wrapper
     compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'    //used by ^
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'    //simple custom fonts

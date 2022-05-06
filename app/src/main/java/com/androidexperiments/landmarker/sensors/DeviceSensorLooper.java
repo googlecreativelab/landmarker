@@ -31,8 +31,7 @@ import com.google.vrtoolkit.cardboard.sensors.SensorEventProvider;
 import java.util.ArrayList;
 
 /**
- * @hide
- * This class registers two sensor listeners for accelerometer and gyroscope to the device
+ * @hide This class registers two sensor listeners for accelerometer and gyroscope to the device
  * {@link SensorManager} and broadcasts all received SensorEvent to registered listeners.
  * <p>This class launches its own thread when {@link #start()} is called.
  */
@@ -40,26 +39,37 @@ public class DeviceSensorLooper implements SensorEventProvider {
 
     private static final String LOG_TAG = DeviceSensorLooper.class.getSimpleName();
 
-    /** Is the inner looper thread started. */
+    /**
+     * Is the inner looper thread started.
+     */
     private boolean isRunning;
 
-    /** Sensor manager used to register and unregister listeners. */
+    /**
+     * Sensor manager used to register and unregister listeners.
+     */
     private SensorManager sensorManager;
 
-    /** Looper thread that listen to SensorEvent */
+    /**
+     * Looper thread that listen to SensorEvent
+     */
     private Looper sensorLooper;
 
-    /** Sensor event listener for the internal sensors event. */
+    /**
+     * Sensor event listener for the internal sensors event.
+     */
     private SensorEventListener sensorEventListener;
 
-    /** List of registered listeners see {@link #registerListener()}. */
+    /**
+     * List of registered listeners see {@link #registerListener()}.
+     */
     private final ArrayList<SensorEventListener> registeredListeners =
             new ArrayList<SensorEventListener>();
 
     /**
      * Default constructor.
+     *
      * @param sensorManager Android sensor manager that will be used to register and unregister the
-     * listeners.
+     *                      listeners.
      */
     public DeviceSensorLooper(SensorManager sensorManager) {
         this.sensorManager = sensorManager;
